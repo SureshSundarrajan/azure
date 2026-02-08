@@ -1,0 +1,326 @@
+Ansible output
+euser@bastion-vm-1 kickstart-ansible]$ mv ~/sloopstash-stg-ssh-key secret/ssh/node
+[azureuser@bastion-vm-1 kickstart-ansible]$ ansible-playbook playbook/kubernetes.yml \
+-i inventory/${ENVIRONMENT}/container/kubernetes/azure/vm \
+-e "{'system':{'user':'azureuser','group':'azureuser'},'kubernetes':{'cni':{'flannel':{'template_url':'https://raw.githubusercontent.com/sloopstash/kickstart-kubernetes/master/cni/flannel/aws/ec2/main.yml'}}}}" \
+--tags "setup, configure, stop, start"
+
+PLAY [kubernetes_master] ***************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************
+ok: [sloopstash-stg-k8s-mtr-1]
+fatal: [sloopstash-stg-k8s-mtr-2]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 12.1.4.11 port 22: Connection timed out", "unreachable": true}
+fatal: [sloopstash-stg-k8s-mtr-3]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 12.1.3.12 port 22: Connection timed out", "unreachable": true}
+
+TASK [system : Remove Firewall service] ************************************************************************************************************************************
+skipping: [sloopstash-stg-k8s-mtr-1]
+
+TASK [system : Set SELinux in permissive mode] *****************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [system : Disable Linux swap memory (temporary)] **********************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [system : Enable bridge netfilter Linux kernel module] ****************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [system : Load Linux kernel modules] **********************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [system : Set Linux kernel params] ************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [system : Set Linux security limit params] ****************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [system : Configure Supervisor] ***************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [system : Stop Supervisor] ********************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [system : Start Supervisor] *******************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker : Install system packages] ************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker : Add Docker repository to package manager source list] *******************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker : Install Docker, Docker client, and Containerd] **************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker : Enable Docker service at boot] ******************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker : Configure Docker] *******************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker : Create Systemd configuration directory for Docker] **********************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker : Configure Systemd for Docker] *******************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker : Stop Docker] ************************************************************************************************************************************************
+ok: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker : Start Docker] ***********************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker_cri : Install Cgroup library] *********************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker_cri : Install Docker CRI] *************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker_cri : Enable Docker CRI service at boot] **********************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker_cri : Configure Docker CRI client] ****************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker_cri : Stop Docker CRI] ****************************************************************************************************************************************
+ok: [sloopstash-stg-k8s-mtr-1]
+
+TASK [docker_cri : Start Docker CRI] ***************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [kubernetes : Add Kubernetes repository to package manager source list] ***********************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [kubernetes : Install Kubernetes agent, Kubernetes admin, and Kubernetes client] **************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [kubernetes : Enable Kubelet service at boot] *************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [kubernetes : Create Kubernetes client configuration directory] *******************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [kubernetes : Configure Kubelet] **************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [kubernetes : Initialize Kubernetes cluster] **************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [kubernetes : Configure Kubernetes client with admin user credentials] ************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [kubernetes : Create Flannel network in Kubernetes cluster] ***********************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [kubernetes : Create bootstrap token in Kubernetes cluster] ***********************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [kubernetes : Add temp node to Ansible inventory] *********************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [kubernetes : Join Kubernetes worker node to the cluster] *************************************************************************************************************
+skipping: [sloopstash-stg-k8s-mtr-1]
+
+TASK [kubernetes : Stop Kubelet] *******************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+TASK [kubernetes : Start Kubelet] ******************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+RUNNING HANDLER [system : Apply Linux kernel params] ***********************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+RUNNING HANDLER [docker : Reload Systemd] **********************************************************************************************************************************
+ok: [sloopstash-stg-k8s-mtr-1]
+
+RUNNING HANDLER [docker : Restart Docker] **********************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+RUNNING HANDLER [kubernetes : Restart Kubelet] *****************************************************************************************************************************
+changed: [sloopstash-stg-k8s-mtr-1]
+
+PLAY [kubernetes_worker] ***************************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************************************
+ok: [sloopstash-stg-k8s-wkr-1]
+ok: [sloopstash-stg-k8s-wkr-2]
+fatal: [sloopstash-stg-k8s-wkr-3]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 12.1.4.22 port 22: Connection timed out", "unreachable": true}
+fatal: [sloopstash-stg-k8s-wkr-4]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 12.1.3.22 port 22: Connection timed out", "unreachable": true}
+fatal: [sloopstash-stg-k8s-wkr-5]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 12.1.4.23 port 22: Connection timed out", "unreachable": true}
+fatal: [sloopstash-stg-k8s-wkr-6]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 12.1.3.23 port 22: Connection timed out", "unreachable": true}
+fatal: [sloopstash-stg-k8s-wkr-7]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 12.1.4.24 port 22: Connection timed out", "unreachable": true}
+
+TASK [system : Remove Firewall service] ************************************************************************************************************************************
+skipping: [sloopstash-stg-k8s-wkr-1]
+skipping: [sloopstash-stg-k8s-wkr-2]
+
+TASK [system : Set SELinux in permissive mode] *****************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [system : Disable Linux swap memory (temporary)] **********************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [system : Enable bridge netfilter Linux kernel module] ****************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+TASK [system : Load Linux kernel modules] **********************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+TASK [system : Set Linux kernel params] ************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+TASK [system : Set Linux security limit params] ****************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [system : Configure Supervisor] ***************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+TASK [system : Stop Supervisor] ********************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [system : Start Supervisor] *******************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+TASK [docker : Install system packages] ************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+TASK [docker : Add Docker repository to package manager source list] *******************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+TASK [docker : Install Docker, Docker client, and Containerd] **************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+TASK [docker : Enable Docker service at boot] ******************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+TASK [docker : Configure Docker] *******************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [docker : Create Systemd configuration directory for Docker] **********************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [docker : Configure Systemd for Docker] *******************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [docker : Stop Docker] ************************************************************************************************************************************************
+ok: [sloopstash-stg-k8s-wkr-2]
+ok: [sloopstash-stg-k8s-wkr-1]
+
+TASK [docker : Start Docker] ***********************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+TASK [docker_cri : Install Cgroup library] *********************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+TASK [docker_cri : Install Docker CRI] *************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [docker_cri : Enable Docker CRI service at boot] **********************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [docker_cri : Configure Docker CRI client] ****************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [docker_cri : Stop Docker CRI] ****************************************************************************************************************************************
+ok: [sloopstash-stg-k8s-wkr-1]
+ok: [sloopstash-stg-k8s-wkr-2]
+
+TASK [docker_cri : Start Docker CRI] ***************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+TASK [kubernetes : Add Kubernetes repository to package manager source list] ***********************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [kubernetes : Install Kubernetes agent, Kubernetes admin, and Kubernetes client] **************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [kubernetes : Enable Kubelet service at boot] *************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [kubernetes : Create Kubernetes client configuration directory] *******************************************************************************************************
+skipping: [sloopstash-stg-k8s-wkr-1]
+
+TASK [kubernetes : Configure Kubelet] **************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+TASK [kubernetes : Initialize Kubernetes cluster] **************************************************************************************************************************
+skipping: [sloopstash-stg-k8s-wkr-1]
+
+TASK [kubernetes : Configure Kubernetes client with admin user credentials] ************************************************************************************************
+skipping: [sloopstash-stg-k8s-wkr-1]
+
+TASK [kubernetes : Create Flannel network in Kubernetes cluster] ***********************************************************************************************************
+skipping: [sloopstash-stg-k8s-wkr-1]
+
+TASK [kubernetes : Create bootstrap token in Kubernetes cluster] ***********************************************************************************************************
+skipping: [sloopstash-stg-k8s-wkr-1]
+
+TASK [kubernetes : Add temp node to Ansible inventory] *********************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [kubernetes : Join Kubernetes worker node to the cluster] *************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [kubernetes : Stop Kubelet] *******************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+TASK [kubernetes : Start Kubelet] ******************************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+RUNNING HANDLER [system : Apply Linux kernel params] ***********************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-2]
+changed: [sloopstash-stg-k8s-wkr-1]
+
+RUNNING HANDLER [docker : Reload Systemd] **********************************************************************************************************************************
+ok: [sloopstash-stg-k8s-wkr-2]
+ok: [sloopstash-stg-k8s-wkr-1]
+
+RUNNING HANDLER [docker : Restart Docker] **********************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+RUNNING HANDLER [kubernetes : Restart Kubelet] *****************************************************************************************************************************
+changed: [sloopstash-stg-k8s-wkr-1]
+changed: [sloopstash-stg-k8s-wkr-2]
+
+PLAY RECAP *****************************************************************************************************************************************************************
+sloopstash-stg-k8s-mtr-1   : ok=41   changed=37   unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+sloopstash-stg-k8s-mtr-2   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0
+sloopstash-stg-k8s-mtr-3   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0
+sloopstash-stg-k8s-wkr-1   : ok=37   changed=33   unreachable=0    failed=0    skipped=6    rescued=0    ignored=0
+sloopstash-stg-k8s-wkr-2   : ok=36   changed=32   unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+sloopstash-stg-k8s-wkr-3   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0
+sloopstash-stg-k8s-wkr-4   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0
+sloopstash-stg-k8s-wkr-5   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0
+sloopstash-stg-k8s-wkr-6   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0
+sloopstash-stg-k8s-wkr-7   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0
+
+[azureuser@bastion-vm-1 kickstart-ansible]$ ssh azureuser@12.1.3.11
